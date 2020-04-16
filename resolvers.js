@@ -1,25 +1,28 @@
-const db = require("./db");
-
 const resolvers = {
   Book: {
-    author: parent => db.getAuthorById(parent.authorId),
+    author: (book, args, { db }) => db.getAuthorById(parent.authorId),
     cover: parent => ({
       path: parent.coverPath
     })
   },
   Author: {
-    books: parent => parent.bookIds.map(db.getBookById),
+    books: (author, args, { db }) => parent.bookIds.map(db.getBookById),
     photo: parent => ({
       path: parent.photoPath
     })
   },
   Avatar: {
-    image: parent => ({
-      path: parent.imagePath
+    image: avatar => ({
+      path: avatar.imagePath
     })
   },
   Image: {
-    url: (parent, args, context) => context.baseAssetsUrl + parent.path
+    url: (image, args, context) => context.baseAssetsUrl + parent.path
+  },
+  Query: {
+    books: (rootValue, args, { db }) => db.getAllBooks(),
+    authors: (rootValue, args, { db }) => db.getAllAuthors(),
+    users: (rootValue, args, { db }) => db.getAllUsers()
   }
 };
 
