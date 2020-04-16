@@ -1,5 +1,5 @@
 {
-  "name": "library-refactoring-start",
+  "name": "library-gql-backend",
   "description": "",
   "dependencies": {
     "apollo-server": "2.11.0",
@@ -8,7 +8,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js localhost 4000"
+    "start": "node index.js",
+    "dev": "nodemon index.js localhost 4000"
   },
   "keywords": [],
   "devDependencies": {
